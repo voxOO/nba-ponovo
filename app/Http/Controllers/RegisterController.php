@@ -15,7 +15,7 @@ class RegisterController extends Controller
 
     public function store(Request $request) {
 
-       
+        $this->validate(request(), User::STORE_RULES);
         $user = new User;
 
         $user->name = request('name');
