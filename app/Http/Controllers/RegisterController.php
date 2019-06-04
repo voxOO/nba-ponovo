@@ -23,6 +23,8 @@ class RegisterController extends Controller
         $user->password = bcrypt(request('password'));
         $user->save();
 
+        auth()->login($user);
+        //session()->flash('message', 'Jako je lepo ici u skolu');
         return redirect('teams');
     }
 }

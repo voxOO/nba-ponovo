@@ -15,7 +15,9 @@ class LoginController extends Controller {
 
     public function store(Request $request) {
 
-        if(auth()->attempt(request(['email','password'])))
+        
+
+        if(!auth()->attempt(request(['email','password'])))
         {
             return back()->withErrors([
                 'message' => "Bad credentials. Please try again"
@@ -29,6 +31,7 @@ class LoginController extends Controller {
 
     public function logout() {
 
+        auth()->logout();
         return redirect('/teams');
     }
 }
