@@ -10,9 +10,12 @@
     <span>{{auth()->user()->name}}</span>
     <a class="btn btn-outline-primary" href="logout">Logout</a>
     @else
-    <a class="btn btn-outline-primary" href="auth/register">Sign up</a>
+    <a class="btn btn-outline-primary" href="/auth/login">Login</a>
     @endif
+    <a class="btn btn-outline-primary" href="/auth/register">Register</a>
 
 </div>
 
-     
+@if(count($errors->all()) > 0)
+    <p class="alert alert-danger">{{$errors->first('message')}}</p>
+@endif
