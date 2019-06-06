@@ -8,21 +8,24 @@ use App\Team;
 
 class LoginController extends Controller {
 
+    public function __construct() 
+    {
+        $this->middleware('guest', ['except' => 'logout']);
+    }
+
     public function create () {
 
-        return view('auth.login');
+        return view('auth/login');
     }
 
     public function store(Request $request) {
 
-        
-
-        if(!auth()->attempt(request(['email','password'])))
-        {
+        if(!auth()->attempt(request(['email','password']))){}
+            
             return back()->withErrors([
                 'message' => "Bad credentials. Please try again"
             ]);
-        }
+        
 
         session()->flash('message', 'Bas mi je drago sto si ovde');
 

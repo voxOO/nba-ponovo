@@ -16,10 +16,11 @@ Route::get('/teams', 'TeamController@index');
 Route::get('/teams/{team_id}','TeamController@show');
 
 Route::get('/players/{id}' , 'PlayerController@showplayer');
+
 Route::get('/auth/register' , 'RegisterController@create');
 Route::post('/auth/register' ,'RegisterController@store');
 
-Route::get('/auth/login' , 'LoginController@create');
+Route::get('/auth/login' , ['as' => 'login' , 'uses' =>'LoginController@create']);
 Route::post('/auth/login' , 'LoginController@store');
 
 Route::get('/logout', 'LoginController@logout');

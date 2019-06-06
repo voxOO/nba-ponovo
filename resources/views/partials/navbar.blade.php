@@ -8,7 +8,7 @@
 
     @if(auth()->check())
     <span>{{auth()->user()->name}}</span>
-    <a class="btn btn-outline-primary" href="logout">Logout</a>
+    <a class="btn btn-outline-primary" href="/logout">Logout</a>
     @else
     <a class="btn btn-outline-primary" href="/auth/login">Login</a>
     @endif

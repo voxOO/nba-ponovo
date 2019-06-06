@@ -6,7 +6,13 @@ use Illuminate\Http\Request;
 use App\Player;
 
 class PlayerController extends Controller
-{
+{   
+
+    public function __construct() 
+    {
+        $this->middleware('auth');
+    }
+
     public function showplayer ($id) {
         
         $player = Player::findOrFail($id);
