@@ -24,3 +24,5 @@ Route::get('/auth/login' , ['as' => 'login' , 'uses' =>'LoginController@create']
 Route::post('/auth/login' , 'LoginController@store');
 
 Route::get('/logout', 'LoginController@logout');
+
+Route::post('/comment/{team_id}', [ 'as'=> 'comment' , 'uses' => 'CommentController@store']);
