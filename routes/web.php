@@ -13,7 +13,7 @@
 
 
 Route::get('/teams', 'TeamController@index');
-Route::get('/teams/{team_id}','TeamController@show');
+Route::get('/teams/{team_id}',['as' => 'single_team' ,'uses' => 'TeamController@show']);
 
 Route::get('/players/{id}' , 'PlayerController@showplayer');
 
@@ -26,3 +26,7 @@ Route::post('/auth/login' , 'LoginController@store');
 Route::get('/logout', 'LoginController@logout');
 
 Route::post('/comment/{team_id}', [ 'as'=> 'comment' , 'uses' => 'CommentController@store']);
+Auth::routes(['verify' => true]);
+
+Route::get('email/user_verification/{id}',['as' => 'verify' , 'uses' => 'LoginController@verify']);
+

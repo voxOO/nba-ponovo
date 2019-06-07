@@ -18,6 +18,6 @@ class CommentController extends Controller
         $comment->team_id = request('team_id');
         $comment->save();
 
-        return redirect('teams');
+        return redirect('teams.single_team');
     }
 }

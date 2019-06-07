@@ -15,26 +15,47 @@ class LoginController extends Controller {
 
     public function create () {
 
-        return view('auth/login');
+        return view('auth.login');
     }
 
     public function store(Request $request) {
-
-        if(!auth()->attempt(request(['email','password']))){}
+        
+        if(!auth()->attempt(request(['email','password']))){
             
             return back()->withErrors([
                 'message' => "Bad credentials. Please try again"
             ]);
-        
+        }
+        elseif(auth()->user()->is_verified === 1) {
 
-        session()->flash('message', 'Bas mi je drago sto si ovde');
+            return redirect('teams');
+        }
+        else {
 
-        return redirect('/teams');
+            auth()->logout();
+            return back()->withErrors([
+                'message' => "You have to verify your email address. Please check your email address for verification"  
+            ]);
+        }
+
+    }
+
+    public function verify ($id) {
+
+        $user = User::findOrFail($id);
+
+        if ($user) {
+            $user->is_verified = true;
+            $user->save();
+        }
+
+        auth()->login($user);
+        return view('email.verified_email_user',compact('user'));
     }
 
     public function logout() {
 
         auth()->logout();
-        return redirect('/teams');
+        return redirect('teams');
     }
 }

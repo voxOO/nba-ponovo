@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Team;
+use App\Mail\UserVerification;
 
 
 class RegisterController extends Controller
@@ -28,8 +29,8 @@ class RegisterController extends Controller
         $user->password = bcrypt(request('password'));
         $user->save();
 
-        auth()->login($user);
-        //session()->flash('message', 'Jako je lepo ici u skolu');
-        return redirect('teams');
+        \Mail::to($request->email)->send(new UserVerification($user));
+
+        return redirect('login');
     }
 }
