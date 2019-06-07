@@ -10,11 +10,19 @@
          <h5>{{$team->city}}</h5>
     </div>
     <hr>
+    <ul>
+    @foreach ($team->players as $player)
+        <li>
+            <a href="/players/{{$player->id}}">{{$player->first_name." ".$player->second_name}}</a>
+        </li>
+    @endforeach
+    </ul>
+
     <form method="POST" action="{{ route('comment', ['team_id' => $team->id]) }}">
         {{csrf_field()}}
     
         <div class="form-group">
-            <label for="content">Comment</label>
+            <label for="content">Comment:</label>
             <input type="text" class="form-control" id="content" name="content">
             @include('partials.error-message' , ['fieldTitle' => 'content' ])
         </div>
